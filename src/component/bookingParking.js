@@ -27,7 +27,15 @@ class BookingParking extends Component {
         var endTime = this.refs.etime.value;
         var temp = true;
         var checkDate = false;
-        // console.log(date);
+        console.log(startTime);
+
+        var splitTime = startTime.split(":");
+        var hours = splitTime[0]
+        var minutes = splitTime[1]
+        hours = Number(hours);
+        minutes = Number(minutes);
+        console.log(hours, minutes);
+
         var splitDate = date.split("-");
         var year = splitDate[0]
         var month = splitDate[1]
@@ -35,21 +43,29 @@ class BookingParking extends Component {
         year = Number(year);
         month = Number(month);
         date = Number(date);
-        console.log(date);
+
+        // console.log(date);
         var d = new Date();
         var currentMonth = d.getMonth();
         currentMonth = currentMonth + 1;
         var currentDate = d.getDate();
         var currentYear = d.getFullYear();
-        console.log(currentDate);
+        var currentHours = d.getHours();
+        var currentMinutes = d.getMinutes();
+        console.log(currentHours);
+        console.log(currentMinutes);
         if (year >= currentYear) {
             if (month >= currentMonth) {
                 if (date >= currentDate) {
-                    checkDate = true;
-                } else { alert('Please Select Current Date'); }
-            } else { alert('Please Select Current Month'); }
-        } else { alert('Please Select Current Year'); }
-        console.log(checkDate);
+                    if (hours >= currentHours) {
+                        if (minutes >= currentMinutes) {
+                            checkDate = true;
+                        }else{ alert('Please Select Right Minute'); }
+                    } else { alert('Please Select Right Hours'); }
+                } else { alert('Please Select Right Date'); }
+            } else { alert('Please Select Right Month'); }
+        } else { alert('Please Select Right Year'); }
+        // console.log(checkDate);
         if (date == '' || startTime == '' || endTime == '') {
             alert('Please Fill All Requirement');
         }
